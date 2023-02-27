@@ -163,8 +163,8 @@ void delete_element(phone** catalog, int* size){
         printf("Enter the number of element that you want to delete:");
         rewind(stdin);
         scanf_s("%d", &delete_num);
-        for (int i = (delete_num - 1); i < (*size - 1); i++) {
-            catalog[i] = catalog[i + 1];
+        for (int i = delete_num; i < (*size - 1); i++) {
+            catalog[i - 1] = catalog[i];
         }
         *size -= 1;
         *catalog = (phone *) realloc(*catalog, (*size) * sizeof(phone));
