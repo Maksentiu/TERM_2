@@ -1,3 +1,3 @@
-C:/Users/maksim/OneDrive/Рабочий стол/Github/TERM_2/src/cmake-build-debug/CMakeFiles/Lab1.dir
-C:/Users/maksim/OneDrive/Рабочий стол/Github/TERM_2/src/cmake-build-debug/CMakeFiles/edit_cache.dir
-C:/Users/maksim/OneDrive/Рабочий стол/Github/TERM_2/src/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+C:/Maksim/Github/TERM_2/src/cmake-build-debug/CMakeFiles/Lab1.dir
+C:/Maksim/Github/TERM_2/src/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Maksim/Github/TERM_2/src/cmake-build-debug/CMakeFiles/rebuild_cache.dir

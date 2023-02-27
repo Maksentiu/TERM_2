@@ -9,7 +9,6 @@ int check(int n)
     }
     return n;
 }
-//sdvgsbvfdbsr
 
 int check_input(int n)
 {
