@@ -258,10 +258,8 @@ void add_element(phone** catalog, int* size){
     }
 }
 void menu(phone* catalog, int size){
-    int a = 1;
-    while(a == 1)
+    while(1)
     {
-        a = 0;
         printf("What you want to do?\n1.Print the catalog\n2.Sort by feature\n3.Delete element\n4. Add element\n5.Exit\nYour choice:");
         int key = check_key();
         switch (key) {
