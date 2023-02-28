@@ -53,16 +53,19 @@ void initialization(phone* catalog, int size, int i) {
      for (int pos = i; pos < size; pos++) {
         rewind(stdin);
         printf("Enter name:\n");
-        gets(catalog[pos].name);
+        fgets(catalog[pos].name, 256, stdin);
 
          printf("Enter color (Red, Blue, Silver, Purple, Midnight, Black):\n");
         while(1)
          {
-             char color[8];
-             gets(color);
+             char color[20];
+             rewind(stdin);
+             fgets(color, 16, stdin);
+             printf("%s", color);
              for (int j = 0; j < 8; j++) {
                  color[j] = little_word(color[j]);
              }
+             printf("%s", color);
              if (strcmp(color, "red") == 0) {
                  catalog[pos].color = Red;
                  break;
@@ -90,7 +93,7 @@ void initialization(phone* catalog, int size, int i) {
              else {
                  fprintf(stderr,"Invalid input.Try again\n");
                  printf("Enter color (Red, Blue, Silver, Purple, Midnight, Black):\n");
-                 rewind(stdin);
+
                  continue;
              }
          }
@@ -158,7 +161,7 @@ char* choose_field(){
     printf("Enter field(name, color, screen, memory, cost):\n");
     char* field_for_sort = malloc(8 * sizeof(char));
     rewind(stdin);
-    gets(field_for_sort);
+    fgets(field_for_sort, 8, stdin);
     for(int i = 0; i < 8; i++) {
         field_for_sort[i] = little_word(field_for_sort[i]);
     }
