@@ -53,7 +53,7 @@ void initialization(phone* catalog, int size, int i) {
      for (int pos = i; pos < size; pos++) {
         rewind(stdin);
         printf("Enter name:\n");
-        fgets(catalog[pos].name, 256, stdin);
+        fgets(catalog[pos].name, 100, stdin);
 
          printf("Enter color (Red, Blue, Silver, Purple, Midnight, Black):\n");
         while(1)
@@ -173,29 +173,35 @@ char* choose_field(){
 void sort_catalog(phone* catalog, int size){
     do {
         while(1){
-           const char *choice = choose_field();
+           char* choice = choose_field();
             if (strcmp(choice, "name") == 0) {
                 qsort(catalog, size, sizeof(phone), (int (*)(const void *, const void *)) compare_field_name);
+                free(choice);
                 break;
             }
             else if (strcmp(choice, "color") == 0) {
                 qsort(catalog, size, sizeof(phone), (int (*)(const void *, const void *)) compare_field_color);
+                free(choice);
                 break;
             }
             else if (strcmp(choice, "screen") == 0) {
                 qsort(catalog, size, sizeof(phone), (int (*)(const void *, const void *)) compare_field_screen);
+                free(choice);
                 break;
             }
             else if (strcmp(choice, "memory") == 0) {
                 qsort(catalog, size, sizeof(phone), (int (*)(const void *, const void *)) compare_field_memory);
+                free(choice);
                 break;
             }
             else if (strcmp(choice, "cost") == 0) {
                 qsort(catalog, size, sizeof(phone), (int (*)(const void *, const void *)) compare_field_cost);
+                free(choice);
                 break;
             }
             else {
                 fprintf(stderr,"There is no such answer.Try again\n");
+                free(choice);
                 continue;
             }
         }
@@ -218,8 +224,8 @@ void delete_element(phone** catalog, int* size){
     do{
         printf("Enter the number of element that you want to delete:");
         int delete_num = check_delete_num(*size);
-        for (int i = (delete_num - 1); i < (*size - 1); i++) {
-            (*catalog)[i] = (*catalog)[i + 1];
+        for (int i = delete_num; i < *size; i++) {
+            (*catalog)[i - 1] = (*catalog)[i];
         }
         (*size)--;
         *catalog = (phone *) realloc(*catalog, (*size) * sizeof(phone));
