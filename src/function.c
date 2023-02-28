@@ -237,10 +237,8 @@ void delete_element(phone** catalog, int* size){
 }
 
 void add_element(phone** catalog, int* size){
-    int a = 1;
-    while(a == 1)
+    while(1)
     {
-        a = 0;
         int buf = *size;
         (*size)++;
         *catalog = (phone *) realloc(*catalog, *size * sizeof(phone));
