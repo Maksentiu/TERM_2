@@ -55,55 +55,53 @@ void initialization(phone* catalog, int size, int i) {
         printf("Enter name:\n");
         fgets(catalog[pos].name, 100, stdin);
 
-         printf("Enter color (Red, Blue, Silver, Purple, Midnight, Black):\n");
-        while(1)
-         {
-             char color[20];
-             rewind(stdin);
-             fgets(color, 16, stdin);
-             for (int j = 0; j < 20; j++) {
-                 color[j] = little_word(color[j]);
-             }
-             if (strcmp(color, "red") == 0) {
-                 catalog[pos].color = Red;
-                 break;
-             }
-             else if (strcmp(color, "blue") == 0){
-                 catalog[pos].color = Blue;
-                 break;
-             }
-             else if (strcmp(color, "silver") == 0){
-                 catalog[pos].color = Silver;
-                 break;
-             }
-             else if (strcmp(color, "purple") == 0) {
-                 catalog[pos].color = Purple;
-                 break;
-             }
-             else if (strcmp(color, "midnight") == 0){
-                 catalog[pos].color = Midnight;
-                 break;
-             }
-             else if (strcmp(color, "black") == 0) {
-                 catalog[pos].color = Black;
-                 break;
-             }
-             else {
-                 fprintf(stderr,"Invalid input.Try again\n");
-                 printf("Enter color (Red, Blue, Silver, Purple, Midnight, Black):\n");
+        printf("Enter color (Red, Blue, Silver, Purple, Midnight, Black):\n");
 
-                 continue;
-             }
-         }
+        char* color = malloc(20 * sizeof(char));
+        rewind(stdin);
+        fgets(color, 16, stdin);
+        for (int j = 0; j < 20; j++) {
+            color[j] = little_word(color[j]);
+        }
+        if (strcmp(color, "red") == 0) {
+            catalog[pos].color = Red;
+            free(color);
+        }
+        else if (strcmp(color, "blue") == 0){
+            catalog[pos].color = Blue;
+            free(color);
+        }
+        else if (strcmp(color, "silver") == 0){
+            catalog[pos].color = Silver;
+            free(color);
+        }
+        else if (strcmp(color, "purple") == 0) {
+            catalog[pos].color = Purple;
+            free(color);
+        }
+        else if (strcmp(color, "midnight") == 0){
+            catalog[pos].color = Midnight;
+            free(color);
+        }
+        else if (strcmp(color, "black") == 0) {
+            catalog[pos].color = Black;
+            free(color);
+        }
+        else {
+            printf("Invalid input. Set up Red by default.\n");
+            catalog[pos].color = Red;
+            free(color);
+        }
+
 
         printf("Enter screen size:\n");
-         catalog[pos].screen = check_input();
+        catalog[pos].screen = check_input();
 
         printf("Enter the amount of memory:\n");
-         catalog[pos].memory = check_input();
+        catalog[pos].memory = check_input();
 
         printf("Enter cost:\n");
-         catalog[pos].cost = check_input();
+        catalog[pos].cost = check_input();
     }
 }
 
@@ -111,13 +109,13 @@ void print_catalog(phone* catalog, int size)
 {
     char* colors_string[6] = {"Red", "Blue", "Silver", "Purple", "Midnight", "Black"};
     for (int i = 0; i < size; i++){
-        printf("_____________________________________________________________\n%d.\n", (i+1));
+        printf("________________________________________________________\n%d.\n", (i+1));
         printf("Name:%s\n", catalog[i].name);
         printf("Color: %s\n", colors_string[catalog[i].color]);
         printf("Screen: %.d\n", catalog[i].screen);
         printf("Memory: %d\n", catalog[i].memory);
         printf("Cost: %.d\n", catalog[i].cost);
-        printf("_____________________________________________________________\n");
+        printf("________________________________________________________\n");
     }
 }
 
@@ -247,7 +245,7 @@ void add_element(phone** catalog, int* size){
         int buf = *size;
         (*size)++;
         *catalog = (phone *) realloc(*catalog, *size * sizeof(phone));
-        initialization(*catalog, *size, (buf+1));
+        initialization(*catalog, *size, buf);
         print_catalog(*catalog, *size);
         printf("Do you want to add another element?\n1.Yes\t\t\t\t2.No\nYour choice:\n");
         int k = check_yes_no();
