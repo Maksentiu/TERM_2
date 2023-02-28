@@ -252,7 +252,7 @@ void add_element(phone** catalog, int* size){
             break;
     }
 }
-noreturn void menu(phone* catalog, int size){
+void menu(phone* catalog, int size){
     while(1)
     {
         printf("What you want to do?\n1.Print the catalog\n2.Sort by feature\n3.Delete element\n4. Add element\n5.Exit\nYour choice:");

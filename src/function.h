@@ -2,7 +2,6 @@
 #include <malloc.h>
 #include <string.h>
 #include <stdlib.h>
-#include <stdnoreturn.h>
 
 typedef enum color_s {
     Red, Blue, Silver, Purple, Midnight, Black
