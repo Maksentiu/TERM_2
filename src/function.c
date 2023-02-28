@@ -60,26 +60,24 @@ void initialization(phone* catalog, int size, int i) {
         char* color = malloc(20 * sizeof(char));
         rewind(stdin);
         fgets(color, 16, stdin);
-        for (int j = 0; j < 20; j++) {
-            color[j] = little_word(color[j]);
-        }
-        if (strcmp(color, "red") == 0) {
+        for (int j = 0; j < 20; j++) color[j] = little_word(color[j]);
+        if (strcmp(color, "red\0") == 0) {
             catalog[pos].color = Red;
             free(color);
         }
-        else if (strcmp(color, "blue") == 0){
+        else if (strcmp(color, "blue\n") == 0){
             catalog[pos].color = Blue;
             free(color);
         }
-        else if (strcmp(color, "silver") == 0){
+        else if (strcmp(color, "silver\n") == 0){
             catalog[pos].color = Silver;
             free(color);
         }
-        else if (strcmp(color, "purple") == 0) {
+        else if (strcmp(color, "purple\n") == 0) {
             catalog[pos].color = Purple;
             free(color);
         }
-        else if (strcmp(color, "midnight") == 0){
+        else if (strcmp(color, "midnight\n") == 0){
             catalog[pos].color = Midnight;
             free(color);
         }
@@ -169,38 +167,39 @@ char* choose_field(){
 }
 
 void sort_catalog(phone* catalog, int size){
+    int k = 1;
     do {
-        while(1){
-           char* choice = choose_field();
+        while(k == 1){
+            char* choice = choose_field();
             if (strcmp(choice, "name") == 0) {
                 qsort(catalog, size, sizeof(phone), (int (*)(const void *, const void *)) compare_field_name);
                 free(choice);
-                break;
+                k = 0;
             }
             else if (strcmp(choice, "color") == 0) {
                 qsort(catalog, size, sizeof(phone), (int (*)(const void *, const void *)) compare_field_color);
                 free(choice);
-                break;
+                k = 0;
             }
             else if (strcmp(choice, "screen") == 0) {
                 qsort(catalog, size, sizeof(phone), (int (*)(const void *, const void *)) compare_field_screen);
                 free(choice);
-                break;
+                k = 0;
             }
             else if (strcmp(choice, "memory") == 0) {
                 qsort(catalog, size, sizeof(phone), (int (*)(const void *, const void *)) compare_field_memory);
                 free(choice);
-                break;
+                k = 0;
             }
             else if (strcmp(choice, "cost") == 0) {
                 qsort(catalog, size, sizeof(phone), (int (*)(const void *, const void *)) compare_field_cost);
                 free(choice);
-                break;
+                k = 0;
             }
             else {
                 fprintf(stderr,"There is no such answer.Try again\n");
                 free(choice);
-                continue;
+
             }
         }
 
@@ -221,9 +220,8 @@ void delete_element(phone** catalog, int* size){
 
     do{
         printf("Enter the number of element that you want to delete:");
-        int delete_num = check_delete_num(*size);
-        for (int i = delete_num; i < *size; i++) {
-            (*catalog)[i - 1] = (*catalog)[i];
+        for (int i = check_delete_num(*size); i < *size; i++) {
+            *(catalog + i - 1) = *(catalog + i);
         }
         (*size)--;
         *catalog = (phone *) realloc(*catalog, (*size) * sizeof(phone));
