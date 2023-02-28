@@ -57,11 +57,16 @@ void initialization(phone* catalog, int size, int i) {
 
         printf("Enter color (Red, Blue, Silver, Purple, Midnight, Black):\n");
 
-        char* color = malloc(20 * sizeof(char));
+        char* color = malloc(1000 * sizeof(char));
         rewind(stdin);
-        fgets(color, 16, stdin);
-        for (int j = 0; j < 20; j++) color[j] = little_word(color[j]);
-        if (strcmp(color, "red\0") == 0) {
+        fgets(color, 1000, stdin);
+        printf("%s", color);
+       /* gets(color);*/
+        for (int j = 0; j < 20; j++) {
+            color[j] = little_word(color[j]);
+        }
+         puts(color);
+        if (strcmp(color, "red\n") == 0) {
             catalog[pos].color = Red;
             free(color);
         }
@@ -81,7 +86,7 @@ void initialization(phone* catalog, int size, int i) {
             catalog[pos].color = Midnight;
             free(color);
         }
-        else if (strcmp(color, "black") == 0) {
+        else if (strcmp(color, "black\n") == 0) {
             catalog[pos].color = Black;
             free(color);
         }
@@ -147,7 +152,7 @@ int compare_field_cost(const phone* a , const phone* b){
 
 char little_word(char ch){
     if(ch >= 'A' && ch <= 'Z')
-        return (char)(ch - ('z' - 'Z'));
+        return (char)(ch - ('Z' - 'z'));
     return ch;
 }
 
