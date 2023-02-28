@@ -19,7 +19,13 @@ void menu(phone* catalog, int size);
 
 phone* create_catalog(int size);
 
-int check_input(int n);
+int check_input();
+
+int check_yes_no();
+
+int check_delete_num(int size);
+
+int check_key();
 
 int compare_field_name(const phone* a , const phone* b);
 
@@ -40,8 +46,6 @@ void sort_catalog(phone* catalog, int size);
 void initialization(phone* catalog, int size, int i);
 
 void add_element(phone** catalog, int* size);
-
-void free_catalog(phone** catalog, int size);
 
 void print_catalog(phone* catalog, int size);
 

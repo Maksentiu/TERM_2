@@ -1,30 +1,45 @@
 #include "function.h"
 
-int check(int n)
+
+int check_yes_no()
 {
-    while ((scanf_s("%d", &n)) != 1 || (n != 1 && n != 2) )
+    int n = 0;
+    while ((scanf_s("%d", &n)) != 1 || (n != 1 && n != 2) || getchar() != '\n')
     {
-        printf("Try again =)");
+        fprintf(stderr,"Try again =)\n");
         rewind(stdin);
     }
     return n;
 }
 
-int check_input(int n)
+int check_input()
 {
+    int n = 0;
     while ((scanf_s("%d", &n)) != 1 || getchar() != '\n')
     {
-        printf("Try again =)");
+        fprintf(stderr,"Try again =)\n");
         rewind(stdin);
     }
     return n;
 }
 
-int check_key(int n)
+int check_delete_num(int size)
 {
+    int n = 0;
+    while ((scanf_s("%d", &n)) != 1 || n > size || n < 1 || getchar() != '\n')
+    {
+        fprintf(stderr,"Try again =)\n");
+        rewind(stdin);
+    }
+    return n;
+}
+
+int check_key()
+{
+    int n = 0;
     while ((scanf_s("%d", &n)) != 1 || (n != 1 && n != 2 && n != 3 && n != 4 && n != 5))
     {
-        printf("Try again =)");
+        fprintf(stderr,"Try again =)\n");
         rewind(stdin);
     }
     return n;
@@ -40,32 +55,54 @@ void initialization(phone* catalog, int size, int i) {
         printf("Enter name:\n");
         gets(catalog[pos].name);
 
-        printf_s("Enter color (Red, Blue, Silver, Purple, Midnight, Black):\n");
-
-        char color[8];
-        gets(color);
-        for(int j = 0; j < 8; j++) {
-             color[j] = little_word(color[j]);
-        }
-        if (strcmp(color, "red") == 0) catalog[pos].color = Red;
-        else if (strcmp(color, "blue") == 0) catalog[pos].color = Blue;
-        else if (strcmp(color, "silver") == 0) catalog[pos].color = Silver;
-        else if (strcmp(color, "purple") == 0) catalog[pos].color = Purple;
-        else if (strcmp(color, "midnight") == 0) catalog[pos].color = Midnight;
-        else if (strcmp(color, "black") == 0) catalog[pos].color = Black;
-        else {
-            printf("Invalid input.Setting up Red by default.");
-            catalog[i].color = Red;
-        }
+         printf("Enter color (Red, Blue, Silver, Purple, Midnight, Black):\n");
+        while(1)
+         {
+             char color[8];
+             gets(color);
+             for (int j = 0; j < 8; j++) {
+                 color[j] = little_word(color[j]);
+             }
+             if (strcmp(color, "red") == 0) {
+                 catalog[pos].color = Red;
+                 break;
+             }
+             else if (strcmp(color, "blue") == 0){
+                 catalog[pos].color = Blue;
+                 break;
+             }
+             else if (strcmp(color, "silver") == 0){
+                 catalog[pos].color = Silver;
+                 break;
+             }
+             else if (strcmp(color, "purple") == 0) {
+                 catalog[pos].color = Purple;
+                 break;
+             }
+             else if (strcmp(color, "midnight") == 0){
+                 catalog[pos].color = Midnight;
+                 break;
+             }
+             else if (strcmp(color, "black") == 0) {
+                 catalog[pos].color = Black;
+                 break;
+             }
+             else {
+                 fprintf(stderr,"Invalid input.Try again\n");
+                 printf("Enter color (Red, Blue, Silver, Purple, Midnight, Black):\n");
+                 rewind(stdin);
+                 continue;
+             }
+         }
 
         printf("Enter screen size:\n");
-         catalog[pos].screen = check_input(catalog[pos].screen);
+         catalog[pos].screen = check_input();
 
         printf("Enter the amount of memory:\n");
-         catalog[pos].memory = check_input(catalog[pos].memory);
+         catalog[pos].memory = check_input();
 
         printf("Enter cost:\n");
-         catalog[pos].cost = check_input(catalog[pos].cost);
+         catalog[pos].cost = check_input();
     }
 }
 
@@ -118,7 +155,7 @@ char little_word(char ch){
 }
 
 char* choose_field(){
-    printf("Enter field(name, color, screen, memory, cost):");
+    printf("Enter field(name, color, screen, memory, cost):\n");
     char* field_for_sort = malloc(8 * sizeof(char));
     rewind(stdin);
     gets(field_for_sort);
@@ -129,73 +166,92 @@ char* choose_field(){
 }
 
 void sort_catalog(phone* catalog, int size){
-    int n = 0;
     do {
-        char *choice = choose_field();
-        if (strcmp(choice, "name") == 0)
-            qsort(catalog, size, sizeof(phone), (int (*)(const void *, const void *)) compare_field_name);
-        else if (strcmp(choice, "color") == 0)
-            qsort(catalog, size, sizeof(phone), (int (*)(const void *, const void *)) compare_field_color);
-        else if (strcmp(choice, "screen") == 0)
-            qsort(catalog, size, sizeof(phone), (int (*)(const void *, const void *)) compare_field_screen);
-        else if (strcmp(choice, "memory") == 0)
-            qsort(catalog, size, sizeof(phone), (int (*)(const void *, const void *)) compare_field_memory);
-        else if (strcmp(choice, "cost") == 0)
-            qsort(catalog, size, sizeof(phone), (int (*)(const void *, const void *)) compare_field_cost);
+        while(1){
+           const char *choice = choose_field();
+            if (strcmp(choice, "name") == 0) {
+                qsort(catalog, size, sizeof(phone), (int (*)(const void *, const void *)) compare_field_name);
+                break;
+            }
+            else if (strcmp(choice, "color") == 0) {
+                qsort(catalog, size, sizeof(phone), (int (*)(const void *, const void *)) compare_field_color);
+                break;
+            }
+            else if (strcmp(choice, "screen") == 0) {
+                qsort(catalog, size, sizeof(phone), (int (*)(const void *, const void *)) compare_field_screen);
+                break;
+            }
+            else if (strcmp(choice, "memory") == 0) {
+                qsort(catalog, size, sizeof(phone), (int (*)(const void *, const void *)) compare_field_memory);
+                break;
+            }
+            else if (strcmp(choice, "cost") == 0) {
+                qsort(catalog, size, sizeof(phone), (int (*)(const void *, const void *)) compare_field_cost);
+                break;
+            }
+            else {
+                fprintf(stderr,"There is no such answer.Try again\n");
+                continue;
+            }
+        }
+
         print_catalog(catalog, size);
+
         printf("Do you want to sort the catalog by other characteristics?\n1.Yes\t\t\t\t2.No\nYour choice:");
-        n = check(n);
+        int n = check_yes_no();
             if (n == 1)
                 continue;
             else if(n == 2)
                 break;
-            else
-                printf("There is no such answer");
-                break;
+
 
     }    while(1);
 }
 
 void delete_element(phone** catalog, int* size){
-    int delete_num = 0;
-    int x = 0;
+
     do{
         printf("Enter the number of element that you want to delete:");
-        rewind(stdin);
-        scanf_s("%d", &delete_num);
-        for (int i = delete_num; i < (*size - 1); i++) {
-            catalog[i - 1] = catalog[i];
+        int delete_num = check_delete_num(*size);
+        for (int i = (delete_num - 1); i < (*size - 1); i++) {
+            catalog[i] = catalog[i + 1];
         }
-        *size -= 1;
+        (*size)--;
         *catalog = (phone *) realloc(*catalog, (*size) * sizeof(phone));
         print_catalog(*catalog, *size);
 
         printf("Do you want to delete another element?\n1.Yes\t\t\t\t2.No\nYour choice:");
-        x = check(x);
+        int x = check_yes_no();
         if (x == 1)
             continue;
         else if (x == 2)
             break;
-        else
-            printf("There is no such answer");
-        break;
     }while(1);
 }
 
 void add_element(phone** catalog, int* size){
-    int buf = *size;
-    *size = *size + 1;
-    *catalog = (phone*) realloc(*catalog, *size * sizeof(phone));
-    initialization(*catalog, *size, buf);
-    print_catalog(*catalog, *size);
+    while(1)
+    {
+
+        int buf = *size;
+        *size = *size + 1;
+        *catalog = (phone *) realloc(*catalog, *size * sizeof(phone));
+        initialization(*catalog, *size, buf);
+        print_catalog(*catalog, *size);
+        printf("Do you want to add another element?\n1.Yes\t\t\t\t2.No\nYour choice:\n");
+        int k = check_yes_no();
+        if(k == 1)
+            continue;
+        else if(k == 2)
+            break;
+    }
 }
 
 void menu(phone* catalog, int size){
-    int key = 0;
     while(1)
     {
         printf("What you want to do?\n1.Print the catalog\n2.Sort by feature\n3.Delete element\n4. Add element\n5.Exit\nYour choice:");
-        key = check_key(key);
+        int key = check_key();
         switch (key) {
             case 1:
                 print_catalog(catalog, size);
