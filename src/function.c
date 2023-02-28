@@ -61,7 +61,6 @@ void initialization(phone* catalog, int size, int i) {
         rewind(stdin);
         fgets(color, 1000, stdin);
         printf("%s", color);
-       /* gets(color);*/
         for (int j = 0; j < 20; j++) {
             color[j] = little_word(color[j]);
         }
