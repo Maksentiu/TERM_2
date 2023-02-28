@@ -151,17 +151,21 @@ int compare_field_cost(const phone* a , const phone* b){
 
 char little_word(char ch){
     if(ch >= 'A' && ch <= 'Z')
-        return (char)(ch - ('Z' - 'z'));
+        return (char)(ch - ('z' - 'Z'));
     return ch;
 }
 
 char* choose_field(){
     printf("Enter field(name, color, screen, memory, cost):\n");
-    char* field_for_sort = malloc(8 * sizeof(char));
+    char* field_for_sort = malloc(9 * sizeof(char));
     rewind(stdin);
-    fgets(field_for_sort, 8, stdin);
-    for(int i = 0; i < 8; i++) {
+    fgets(field_for_sort, 9, stdin);
+    for(int i = 0; i < 9; i++) {
         field_for_sort[i] = little_word(field_for_sort[i]);
+        if (field_for_sort[i] == '\n') {
+            field_for_sort[i] = '\0';
+            break;
+        }
     }
     return field_for_sort;
 }
@@ -215,7 +219,7 @@ void delete_element(phone** catalog, int* size){
         printf("Enter the number of element that you want to delete:");
         int delete_num = check_delete_num(*size);
         for (int i = (delete_num - 1); i < (*size - 1); i++) {
-            catalog[i] = catalog[i + 1];
+            (*catalog)[i] = (*catalog)[i + 1];
         }
         (*size)--;
         *catalog = (phone *) realloc(*catalog, (*size) * sizeof(phone));
@@ -235,9 +239,9 @@ void add_element(phone** catalog, int* size){
     {
 
         int buf = *size;
-        *size = *size + 1;
+        (*size)++;
         *catalog = (phone *) realloc(*catalog, *size * sizeof(phone));
-        initialization(*catalog, *size, buf);
+        initialization(*catalog, *size, (buf+1));
         print_catalog(*catalog, *size);
         printf("Do you want to add another element?\n1.Yes\t\t\t\t2.No\nYour choice:\n");
         int k = check_yes_no();

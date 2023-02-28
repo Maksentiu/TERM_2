@@ -21,7 +21,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5ddfaf69-154d-4fa6-bd24-675ee31f3979" name="Changes" comment="test">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_deps" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/.ninja_log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Lab1.dir/function.c.obj" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/CMakeFiles/Lab1.dir/function.c.obj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cmake-build-debug/Lab1.exe" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Lab1.exe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" beforeDir="false" afterPath="$PROJECT_DIR$/cmake-build-debug/Testing/Temporary/LastTest.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/function.c" beforeDir="false" afterPath="$PROJECT_DIR$/function.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,7 +90,7 @@
       <workItem from="1677539910530" duration="778000" />
       <workItem from="1677540775030" duration="1123000" />
       <workItem from="1677570170813" duration="4281000" />
-      <workItem from="1677592808451" duration="6429000" />
+      <workItem from="1677592808451" duration="9034000" />
     </task>
     <task id="LOCAL-00001" summary="kui">
       <created>1677540059720</created>
@@ -149,7 +155,14 @@
       <option name="project" value="LOCAL" />
       <updated>1677599105730</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="test">
+      <created>1677599994553</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1677599994553</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
