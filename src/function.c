@@ -225,8 +225,8 @@ void delete_element(phone** catalog, int* size){
 
     do{
         printf("Enter the number of element that you want to delete:");
-        for (int i = check_delete_num(*size); i < *size; i++) {
-            catalog[i - 1] = catalog[i];
+        for (int i = check_delete_num(*size) - 1; i < *size - 1; i++) {
+            catalog[i] = catalog[i + 1];
         }
         (*size)--;
         *catalog = (phone *) realloc(*catalog, (*size) * sizeof(phone));
@@ -257,6 +257,7 @@ void add_element(phone** catalog, int* size){
             break;
     }
 }
+
 void menu(phone* catalog, int size){
     while(1)
     {
